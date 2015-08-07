@@ -25,7 +25,13 @@ public WebDriver getDriver()
 	//System.out.println(props);
 	if(browser.equals("chrome"))
 	{
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+		if(props.get("os.name").toString().equalsIgnoreCase("linux"))
+			if(props.get("os.arch").toString().equals("amd64"))
+				System.setProperty("webdriver.chrome.driver", "src/main/resources/execs/chromedriver_l64");
+			else
+				System.setProperty("webdriver.chrome.driver", "src/main/resources/execs/chromedriver_l32");
+		else
+			System.setProperty("webdriver.chrome.driver", "src/main/resources/execs/chromedriver.exe");
 		driver=new ChromeDriver();
 	}
 	else
