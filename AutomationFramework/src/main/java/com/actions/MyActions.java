@@ -1,6 +1,6 @@
 package com.actions;
 
-import com.business.MyBusiness;
+import com.business.Home;
 import com.helpers.DriverWrapper;
 
 import cucumber.api.PendingException;
@@ -18,9 +18,10 @@ public class MyActions {
 	}
 
 	
-	@Given("^Browser is (.+)$")
-	public void browserSelection(String browser) throws Throwable {
+	@Given("^Browser is (.+) on (.+)$")
+	public void browserSelection(String browser,String platform) throws Throwable {
 		System.setProperty("browser", browser);
+		System.setProperty("platform", platform);
 		setup();
 	   // throw new PendingException();
 	}
@@ -28,15 +29,36 @@ public class MyActions {
 	@Given("^Webpage is (.+)$")
 	public void openUrl(String url)
 	{
-		MyBusiness business=new MyBusiness();
+		Home business=new Home();
 		business.openURL(wrapper, url);
 	}
 	
 
-@Then("^search for selenium$")
-public void search_for_selenium() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+@Then("^search for (.+)$")
+public void searchForText(String text) throws Throwable {
+    Home home=new Home();
+    home.searchText(wrapper, text);
+}
+
+@Then("^click on (\\d+)st link$")
+public void clickOnLinkPos(int n) throws Throwable {
+    //throw new PendingException();
+	Home home=new Home();
+    home.clickNthLink(wrapper, n);
+}
+
+
+
+@Then("^wait for (\\d+) ms$")
+public void waitForMillis(int time) throws Throwable {
+    int wait=time;
+    Thread.sleep(wait);
+}
+
+
+@Then("^close browser$")
+public void close_browser() throws Throwable {
+	wrapper.close();
 }
 
 }

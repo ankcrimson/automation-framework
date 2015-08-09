@@ -42,4 +42,11 @@ public WebDriver getDriver()
 	
 	return driver;
 }
+public void close()
+{
+if(driver!=null)
+{
+	driver.close();
+}
+}
 }

@@ -23,7 +23,7 @@ public class PageElementsHelper{
 	private WebDriver driver;
 	
 	private static final int SHORT_TO = 5;
-	private static final String PAGEOBJECT_PATH = "./src/test/resources/com/properties/";
+	private static final String PAGEOBJECT_PATH = "./src/main/resources/com/properties/";
 	private static HashMap<String,HashMap<String,HashMap<String,String>>> allProps;//All Propertiy files within pageobject_path
 	private static ArrayList<String> priorityList; 
 	
@@ -31,7 +31,7 @@ public class PageElementsHelper{
 		try{
 		setAllProps();
 		}catch(Exception e){System.out.println("Error Reading Properties");}
-		System.out.println("Properties loaded"+getAllProps());
+		//System.out.println("Properties loaded"+getAllProps());
 		try{
 			loadPriority();
 		}catch(Exception e){System.out.println("Error Reading Priority");}
@@ -117,7 +117,7 @@ public class PageElementsHelper{
 				//waiter.until( ExpectedConditions.presenceOfElementLocated(by) );
 				//driver.FindElement(by);
 				try{
-				we=driver.findElement(by);
+				we=(new WebDriverWait(driver, 2)).until(ExpectedConditions.presenceOfElementLocated(by));
 				}catch(Throwable th){System.out.println("Problem with selector:"+selector+", in page:"+pageName+"having value"+pathValue);continue;}
 			}if(we!=null)
 			break;
@@ -169,7 +169,7 @@ public class PageElementsHelper{
 					//waiter.until( ExpectedConditions.presenceOfElementLocated(by) );
 					//driver.FindElement(by);
 					try{
-					we=driver.findElements(by);
+					we=(new WebDriverWait(driver, 2)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
 					}catch(Throwable th){System.out.println("Problem with selector:"+selector+", in page:"+pageName+"having value"+pathValue);continue;}
 				}if(we!=null&&we.size()>0)
 				break;
@@ -200,7 +200,7 @@ public class PageElementsHelper{
 		line=line.trim();
 		if(line.startsWith("#")|| line.length()==0)
 			continue;
-		priorityList.add(line);
+		priorityList.add(line.toUpperCase());
 		
 	}
 	br.close();
