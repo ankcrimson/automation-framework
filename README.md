@@ -1,5 +1,5 @@
 # Automation Framework With Selenium And Appium
-## This unique framework design is absolutely new to Industry and is highly customizable
+## This is highly customizable but old as of now
 > This project is to share the same approach 
 > I will be maintaining the code, and if there are any suggestions, be sure to update 
 > Thanks
@@ -27,3 +27,5 @@
 
 ### Windows Users / MAC Users
 * Download Appium from Appium Website [There is a GUI Available]
+
+  Todo: update libraries
